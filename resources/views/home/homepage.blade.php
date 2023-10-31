@@ -14,6 +14,7 @@
     <x-homepage.banner quote="Find out who you are, and do it on purpose."/>
     <x-homepage.services/>
     <x-homepage.about/>
+    <x-homepage.whychooseus/>
     <x-homepage.footer/>
 </body>
 </html>

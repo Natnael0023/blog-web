@@ -1,10 +1,10 @@
 
     <nav class=" flex flex-col items-center gap-4 border bg-white border-red-400 py-4 md:sticky lg:sticky top-0 z-50">
         <div class=" flex items-center">
-            <h1 class=" text-2xl md:text-3xl lg:text-4xl italic font-serif font-bold ">bloggie</h1>
+            <h1 class=" text-2xl md:text-3xl lg:text-4xl italic font-serif font-bold ">blooger</h1>
         </div>
         <div class="">
-            <ul class=" flex gap-4 md:gap-10 lg:gap-14 ">
+            <ul class=" flex gap-3 md:gap-10 lg:gap-14 text-gray-600">
                 <li>
                     <a href=""
                     class="hover:font-semibold">HOME</a>

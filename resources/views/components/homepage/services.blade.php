@@ -1,10 +1,10 @@
-<div class=" mt-20">
+<div class=" mt-20 border border-red-400">
     <h1 class=" text-3xl font-bold">Services</h1>
     <p class=" mt-3 text-gray-500">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, ratione.
     </p>
 
-    <div class=" flex gap-10 items-center justify-between mt-14">
+    <div class=" flex gap-10 items-center justify-between mt-14 border border-sky-500 overflow-y-hidden">
         <div class=" flex flex-col gap-3 items-center">
             <div class=" w-[20rem] max-h-[23rem] border  overflow-hidden rounded-xl ">
                 <img src="{{asset('/images/servicesimg.jpg')}}" alt=""
