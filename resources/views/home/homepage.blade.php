@@ -10,7 +10,6 @@
 </head>
 <body class=" px-3 md:px-20 lg:px-56">
     <x-homepage.-nav/>
-    <h1>Homepage</h1>
     <x-homepage.banner quote="Find out who you are, and do it on purpose."/>
     <x-homepage.services/>
     <x-homepage.about/>

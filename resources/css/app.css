@@ -28,3 +28,8 @@
     top: 80px;
     opacity: 0.15;
   }
+
+  .icon{
+    width: 1.5rem;
+    height: 1.5rem;
+  }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::id())
         {
@@ -20,7 +21,14 @@ class HomeController extends Controller
 
             else if($usertype == 'user')
             {
-                return view('dashboard');
+
+        
+                $posts = Post::orderBy('created_at','desc')->get();
+
+                return view('feed.feed', ['posts' => $posts]);
+
+               
+             }        
             }
             else 
             {
@@ -28,8 +36,19 @@ class HomeController extends Controller
             }
         }
 
-    }
 
+
+    public function search(Request $request)
+    {
+
+        
+        $keyword = $request->input('keyword');
+
+        $posts = Post::where('title','like',"%$keyword%")->orWhere('text','like',"%$keyword%")->get();
+
+        return view('feed.feed',['posts'=>$posts,'searchResults'=>$posts]);
+        
+    }
 
     public function homepage()
     {
