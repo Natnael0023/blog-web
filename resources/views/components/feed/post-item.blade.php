@@ -2,7 +2,7 @@
     <div class="  flex justify-between items-center p-3">
         <div class=" flex  items-center gap-2">
             <div class=" h-[3rem] w-[3rem] rounded-full">
-                <img src="{{asset('/images/'.$post->image)}}" alt=""
+                <img src="{{asset('/images/avatar/'.$post->user->avatar)}}" alt=""
                 class=" rounded-full h-full w-full">
             </div>
             <div>

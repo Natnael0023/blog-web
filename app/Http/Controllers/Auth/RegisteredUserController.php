@@ -31,21 +31,32 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $user = User::create([
+    
+        $avatarPath = null;
+    
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarName = 'avtr_' . time() . '.' . $request->file('avatar')->extension();
+            $avatarPath = $avatar->move(public_path('images/avatar'),$avatarName);
+        }
+    
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $avatarName,
         ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
+    
+            $user->save();
+    
+            event(new Registered($user));
+    
+            Auth::login($user);
+    
         return redirect(RouteServiceProvider::HOME);
     }
 }
