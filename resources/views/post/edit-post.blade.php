@@ -18,8 +18,6 @@
             @csrf
             @method('put')
            
-        
-
             <div class="  flex-1">
                     <legend class=" text-gray-400 italic"> post details </legend>
                     <div class=" flex flex-col justify-between">

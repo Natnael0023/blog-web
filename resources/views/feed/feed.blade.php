@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.4.2/dist/alpine.min.js" defer></script>
-    <title>Document</title>
-</head>
-<body class=" px-3 md:px-32 lg:px-60 bg-gray-100">
+@extends('layouts.layout')
+
+@section('content')
+
+
     <H1>Feed</H1>
-    <x-homepage.-nav/>
     <x-feed.postlink/>
 
     {{-- pop up --}}
@@ -46,17 +39,21 @@
         {{-- post item --}}
         @if ('searchResults')
             @foreach ($posts as $post )
-                <x-feed.post-item :post="$post"/>
+                {{-- <x-feed.post-item :post="$post"/> --}}
+                @include('post.post-item')
             @endforeach
+            {{$posts->links()}}
+
         @else
             @foreach ($posts as $post )
-                <x-feed.post-item :post="$post"/>
+                {{-- <x-feed.post-item :post="$post"/> --}}
+                @include('post.post-item')
+
             @endforeach
+            {{$posts->links()}}
         @endif
         {{-- //post item --}}
     </div>
     {{-- //feeds --}}
 
-    <x-footer/>
-</body>
-</html>
+@endsection

@@ -21,14 +21,19 @@ class HomeController extends Controller
 
             else if($usertype == 'user')
             {
+                $posts = Post::orderBy('created_at','desc');
 
-        
-                $posts = Post::orderBy('created_at','desc')->get();
+                if(request()->has('keyword'))
+                {
+                    $keyword = $request->input('keyword');    
+                    $posts->where('title','like',"%$keyword%")->orWhere('text','like',"%$keyword%");
+                }
 
-                return view('feed.feed', ['posts' => $posts]);
+                $posts = $posts->paginate(3);
 
-               
-             }        
+                return view('feed.feed', ['posts' => $posts,'searchResults'=>$posts]);
+             }    
+
             }
             else 
             {
@@ -36,19 +41,6 @@ class HomeController extends Controller
             }
         }
 
-
-
-    public function search(Request $request)
-    {
-
-        
-        $keyword = $request->input('keyword');
-
-        $posts = Post::where('title','like',"%$keyword%")->orWhere('text','like',"%$keyword%")->get();
-
-        return view('feed.feed',['posts'=>$posts,'searchResults'=>$posts]);
-        
-    }
 
     public function homepage()
     {

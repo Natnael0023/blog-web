@@ -8,8 +8,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <li>
-                            <button class=" flex items-center  bg-white border  p-2 border-gray-300">
-                                <div>{{ Auth::user()->email }}</div>
+                            <button class=" flex gap-2 items-center  bg-white  p-2 border-gray-300">
+                                <div class=" w-[3rem] h-[3rem] ">
+                                    <img src= "{{asset('/images/avatar/'.Auth::user()->avatar)}}"  alt=""
+                                    class=" w-full h-full rounded-full">
+                                </div>
+                                <div>{{ Auth::user()->name }}</div>
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -34,7 +38,7 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                    </x-slot>
+                    </x-slot> 
                 </x-dropdown>
             </div>
 

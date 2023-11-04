@@ -80,7 +80,6 @@ class PostController extends Controller
     return redirect(route('home'))->with('status','post updated successfully');
     }
 
-
     public function delete(Post $post, Request $request){
   
         if($post->user_id == auth()->user()->id)
