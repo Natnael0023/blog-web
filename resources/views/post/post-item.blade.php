@@ -1,4 +1,4 @@
-<div class=" flex flex-col w-full md:w-[30rem]  lg:w-[30rem] border rounded-xl bg-white hover:shadow">
+<div class=" p-3 flex flex-col w-full md:w-[30rem]  lg:w-[30rem] border rounded-xl bg-white hover:shadow">
     <div class="  flex justify-between items-center p-3">
         <div class=" flex  items-center gap-2">
             <div class=" h-[3rem] w-[3rem] rounded-full">
@@ -44,7 +44,28 @@
         <img src="{{asset('/images/'.$post->image)}} " alt=""
         class=" h-full">
     </div>
+    <div class=" py-3 flex justify-evenly">
+        <a href="{{route('post.like',$post)}}" class=" flex gap-2 bg-green-200 p-1 px-3 rounded-full">
+            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
+            <span>{{ $post->likes()->count()}}</span>
+        </a>
+        <a href="" class=" flex gap-2 bg-red-200 p-1 px-3 rounded-full">
+            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
+            <span>123</span>
+        </a>
+        <a href="" class=" flex gap-2 bg-sky-200 p-1 px-3 rounded-full">
+            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
+            <span>123</span>
+
+        </a>
+    </div>
     <div>
         @include('comment.comment-submit')
     </div>
+
+    @foreach ($post->comments as $comment)
+        @include('comment.comment-section')
+    @endforeach
+
+
 </div>

@@ -9,6 +9,7 @@
     z-index: -1;
     width: 100%;
     max-width: 640px;
+    display: none;
     background-image: radial-gradient(
         at 27% 37%,
         hsla(215, 98%, 61%, 1) 0px,
@@ -25,7 +26,6 @@
     width: 100%;
     height: 100%;
     filter: blur(100px) saturate(150%);
-    top: 80px;
     opacity: 0.15;
   }
 

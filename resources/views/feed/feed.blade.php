@@ -1,9 +1,17 @@
 @extends('layouts.layout')
 
+@push('scripts')
+    <script src="{{ asset('js/menulinks.js')}}"></script>
+@endpush
+
+
 @section('content')
 
+<div class=" flex mt-4 justify-between items-start gap-10">
 
-    <H1>Feed</H1>
+@include('layouts.sidebar-left')
+
+<div class=" flex-3">
     <x-feed.postlink/>
 
     {{-- pop up --}}
@@ -55,5 +63,7 @@
         {{-- //post item --}}
     </div>
     {{-- //feeds --}}
+</div>
+    @include('layouts.sidebar-right')
 
 @endsection

@@ -9,15 +9,14 @@
     <title>Document</title>
 </head>
 
+<body class="  px-3 md:px-32 lg:px-60 bg-gray-100">
+    
+    @include('layouts.-nav')
+    @include('shared.success-flash')
 
-<body class=" px-3 md:px-32 lg:px-60 bg-gray-100">
-
-@include('layouts.-nav')
-
-<div>
-    {{-- content goes here --}}
-    @yield('content')
-</div>
+       <div class=" flex-3">
+           @yield('content')
+        </div>
 
 @include('layouts.footer')
 

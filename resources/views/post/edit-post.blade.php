@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body class=" md:px-32 lg:px-60">
-    <x-homepage.-nav/>
+@extends('layouts.layout')
+
+@section('content')
 
     <div class=" mt-10 border border-red-400 flex flex-col gap-5">
         <h1 class=" text-2xl">Edit Post</h1>
@@ -51,8 +44,7 @@
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
-</body>
-</html>
+
+    @endsection
