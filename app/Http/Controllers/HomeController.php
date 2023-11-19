@@ -31,15 +31,9 @@ class HomeController extends Controller
 
                 $posts = $posts->paginate(3);
 
-                $menulinks = [
-                    (object) ['id'=>1, 'name'=>'Home', 'route'=>'home', 'icon'=>'home.ico'],
-                    (object) ['id'=>2, 'name'=>'Terms','route'=>'terms','icon'=>'terms.ico'],
-                    (object) ['id'=>3, 'name'=>'Feeds','route'=>'feeds','icon'=>'home.ico'],
-                    (object) ['id'=>4, 'name'=>'Profile','route'=>'profile','icon'=>'home.ico'],
+              
 
-                ];
-
-                return view('feed.feed', ['posts' => $posts,'searchResults'=>$posts,'menulinks'=>$menulinks]);
+                return view('feed.feed', ['posts' => $posts,'searchResults'=>$posts]);
              }    
 
             }

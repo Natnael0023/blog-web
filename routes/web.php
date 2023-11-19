@@ -30,12 +30,15 @@ Route::delete('/home/posts/{comment}/comment',[CommentController::class, 'destro
 
 Route::get('posts/{post}/like',[LikeController::class,'like'])->middleware('auth')->name('post.like');
 
+Route::get('/users/{user}/follow',[ProfileController::class,'follow'])->middleware('auth')->name('user.follow');
+
 // Route::get('/home/search',[HomeController::class, 'search'])->middleware('auth')->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/{user}',[ProfileController::class, 'show'])->name('profile.show');
 });
 
 require __DIR__.'/auth.php';

@@ -2,8 +2,10 @@
     <div class="  flex justify-between items-center p-3">
         <div class=" flex  items-center gap-2">
             <div class=" h-[3rem] w-[3rem] rounded-full">
-                <img src="{{asset('/images/avatar/'.$post->user->avatar)}}" alt=""
-                class=" rounded-full h-full w-full">
+                <a href="{{route('profile.show',$post->user)}}">
+                    <img src="{{asset('/images/avatar/'.$post->user->avatar)}}" alt=""
+                    class=" rounded-full h-full w-full">
+                </a>
             </div>
             <div>
                 <p>
@@ -45,7 +47,12 @@
         class=" h-full">
     </div>
     <div class=" py-3 flex justify-evenly">
-        <a href="{{route('post.like',$post)}}" class=" flex gap-2 bg-green-200 p-1 px-3 rounded-full">
+        <a href="{{route('post.like',$post)}}" class=" flex gap-2  p-1 px-3 rounded-full 
+        @if(auth()->user()->likes()->where('post_id',$post->id)->exists()) 
+        bg-green-200
+        @else
+        border border-green-200
+        @endif">
             <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
             <span>{{ $post->likes()->count()}}</span>
         </a>

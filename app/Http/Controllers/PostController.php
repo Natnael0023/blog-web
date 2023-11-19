@@ -93,8 +93,8 @@ class PostController extends Controller
         }
         else 
         {
-            return redirect()->back()->with('unauthorized','You\'re not authorized');
+            return redirect()->back()->with('error','You\'re not authorized');
         }
-        return redirect()->back()->with('deleteSuccess','Post has been deleted');
+        return redirect()->back()->with('success','Post has been deleted');
     }
 }

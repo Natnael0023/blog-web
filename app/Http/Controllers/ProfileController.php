@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,5 +58,31 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function show(User $user)
+    {
+        $postsByUser = Post::where('user_id',$user->id)
+        ->orderBy('created_at','desc')
+        ->get();
+
+        return view('profile.show-profile',compact('user','postsByUser'));
+    }
+
+    public function follow(User $user)
+    {
+        if(auth()->user()->followings()->where('user_id',$user->id)->exists())
+        {
+            return $this->unfollow($user);
+        }
+
+        auth()->user()->followings()->attach($user->id);
+        return redirect()->back()->with('success','you\'ve started following '.$user->name);
+    }
+
+    public function unfollow($user)
+    {
+        auth()->user()->followings()->detach($user->id);
+        return redirect()->back()->with('success','You unfollowed '.$user->name);
     }
 }

@@ -1,4 +1,4 @@
-<div class=" mt-20 border border-red-400">
+<div id="services" class="  transition-all duration-700 ease-out mt-20 border border-red-400">
     <h1 class=" text-3xl font-bold">Services</h1>
     <p class=" mt-3 text-gray-500">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, ratione.
@@ -41,7 +41,6 @@
     </div>
     
 </div>
-
 
 
 

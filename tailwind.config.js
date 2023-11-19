@@ -12,8 +12,12 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+                serif: ['DM Serif Display']
             },
         },
+
+      
     },
     plugins: [forms],
 };
+

@@ -1,4 +1,4 @@
-    <nav class=" flex justify-between px-10 items-center gap-2 border bg-white border-red-400 py-2 md:sticky lg:sticky top-0 z-50">
+    <nav id="nav" class=" flex justify-between px-10 items-center gap-2 bg-white rounded-b-xl py-2 md:sticky lg:sticky top-0 z-50  ">
         <div class=" flex items-center">
             <h1 class=" text-2xl md:text-3xl lg:text-4xl italic font-serif font-bold ">blooger</h1>
         </div>
@@ -25,3 +25,15 @@
             </ul>
         </div>
     </nav>
+
+    <script>
+        window.addEventListener('scroll', function(){
+            var nav = document.getElementById('nav')
+            if(window.pageYOffset > 100){
+                nav.classList.add('shadow','duration-500')
+            }
+            else{
+                nav.classList.remove('shadow')
+            }
+        })
+    </script>
