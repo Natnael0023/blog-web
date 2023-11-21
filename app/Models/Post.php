@@ -17,6 +17,10 @@ class Post extends Model
         'image',
     ];
 
+    protected $with = ['user:id,name,avatar', 'comments.user:id,name,avatar'];
+
+    protected $withCount = ['likes'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

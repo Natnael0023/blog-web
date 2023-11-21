@@ -9,10 +9,13 @@
         class=" flex flex-col gap-3">
             @csrf
             @method('post')
-                <div>
-                    <h1>Title</h1>
-                    <input type="text" name="title" id="" required
-                    class=" rounded-xl">
+                <div class="flex flex-col items-start">
+                    <h1>Title <span class="text-red-500">*</span></h1>
+                    <input type="text" name="title" id="" 
+                    class=" rounded-xl"> 
+                        @error('title')
+                            <span class=" text-red-500">{{$message}}</span>
+                        @enderror
                 </div>
                 <div>
                     <h1>Text</h1>

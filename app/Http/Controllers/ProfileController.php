@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -26,18 +27,45 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    // public function update(ProfileUpdateRequest $request): RedirectResponse
+    // {
+    //     $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    //     if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
+
+    //     $request->user()->save();
+
+    //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // }
+
+    // naty prof update
+    public function update(UpdateUserRequest $request,User $user)
+    {
+        $this->authorize('update',$user);
+
+        $avtrName = null;
+        if($request->hasFile('avatar'))
+        {
+            if($user->avatar != null)
+            {
+                $oldAvtrPath = 'images/avatar/'.$user->avatar;
+                unlink($oldAvtrPath);
+            }
+            $avtr = $request('avatar');
+            $avtrName = 'avtr_'.time().'.'.$request('avatar')->extension();
+            $avtr->move(public_path('images/avatar/'),$avtrName);
+            $user->avatar = $avtrName;
         }
 
-        $request->user()->save();
+        $validated = $request->validated();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user->update($validated);
+ 
+        return redirect()->back()->with('success','profile updated successfully');
     }
+    // end
 
     /**
      * Delete the user's account.
@@ -85,4 +113,13 @@ class ProfileController extends Controller
         auth()->user()->followings()->detach($user->id);
         return redirect()->back()->with('success','You unfollowed '.$user->name);
     }
+
+    public function setLocale(Request $request)
+    {
+        $locale = $request->input('locale');
+        app()->setLocale($locale);
+        // You can also store the selected locale in the session or user preferences if needed.
+        // ...
+    }
+
 }

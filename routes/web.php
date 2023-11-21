@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use Illuminate\Support\Facades\App;
 
 Route::get('/',[HomeController::class, 'homepage'] )->name('');
 Route::get('/dashboard', function () {
@@ -13,6 +17,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home',[HomeController::class, 'index'])->middleware('auth')->name('home');
+
+Route::get('/feed',FeedController::class)->middleware('auth')->name('feed');
 
 Route::get('/home/create',[PostController::class, 'create'])->name('post.create');
 
@@ -34,9 +40,20 @@ Route::get('/users/{user}/follow',[ProfileController::class,'follow'])->middlewa
 
 // Route::get('/home/search',[HomeController::class, 'search'])->middleware('auth')->name('search');
 
+//lang
+Route::get('lang/{lang}', function($lang){
+    App::setlocale($lang);
+    session()->put('locale', $lang);
+    
+    redirect()->back();
+})->name('lang')->middleware('web');
+
+//admin
+Route::get('/admin',[AdminDashboardController::class,'index'])-> name('admin.index')->middleware('auth','can:admin');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/user/{user}',[ProfileController::class, 'show'])->name('profile.show');
 });

@@ -1,27 +1,41 @@
-    <nav id="nav" class=" flex justify-between px-10 items-center gap-2 bg-white rounded-b-xl py-2 md:sticky lg:sticky top-0 z-50  ">
+    <nav id="nav" class=" flex justify-between  md:px-32 lg:px-72 px-10 items-center gap-2 bg-white rounded-b-xl   md:sticky lg:sticky top-0 z-50  ">
         <div class=" flex items-center">
-            <h1 class=" text-2xl md:text-3xl lg:text-4xl italic font-serif font-bold ">blooger</h1>
+            <h1 class=" text-2xl text-blue-500 md:text-3xl lg:text-4xl italic font-serif font-bold ">blooger</h1>
+            @can('admin')
+                <span class=" ml-2 text-gray-400">admin</span>
+            @endcan
         </div>
         <div class="">
             <ul class=" flex items-center gap-3 md:gap-10 lg:gap-14 text-gray-600">
+
+                @can('admin')  
+                <a href="{{route('admin.index')}}">
+                    Admin Dashboard
+                </a>
+                @endcan
+
                 
                 @if (Route::has('login'))
+                
 
                 @auth
                 
                 <x-app-layout>
                 </x-app-layout>
+
                 @else
+                
                 <li>
                     <a href="{{route('register')}}"
                     class="hover:font-semibold">SIGNUP</a>
                 </li>
                 <li>
                     <a href="{{route('login')}}"
-                    class="hover:font-semibold">LOGIN</a>
+                class="hover:font-semibold">LOGIN</a>
                 </li> 
                 @endauth
                 @endif 
+
             </ul>
         </div>
     </nav>

@@ -4,7 +4,7 @@
             <div class=" h-[3rem] w-[3rem] rounded-full">
                 <a href="{{route('profile.show',$post->user)}}">
                     <img src="{{asset('/images/avatar/'.$post->user->avatar)}}" alt=""
-                    class=" rounded-full h-full w-full">
+                    class=" object-cover rounded-full h-full w-full border-2 border-sky-200">
                 </a>
             </div>
             <div>
@@ -13,12 +13,13 @@
                   </p>
                   <p
                       class=" text-gray-400 text-sm">
-                      {{$post->created_at}}
+                      {{ \Carbon\Carbon::parse($post->created_at)->format(' D H:i')}} -
+                      {{$post->created_at->diffForHumans()}}
                 </p>
             </div>
         </div>
         {{-- edit & delete --}}
-        @if ($post->user_id === auth()->user()->id) 
+        @can('update',$post)
             <div class=" flex gap-2 ">
                 <a href="{{route('post.edit',['post'=>$post])}}"
                     class="opacity-50 hover:opacity-100">
@@ -29,7 +30,7 @@
                     <img class="icon" src="{{asset('/icons/delete.ico')}}" alt="">
                 </a>
             </div>
-        @endif
+       @endcan
         {{-- //edit & delete --}}
     </div>
     <div class=" px-3">
@@ -44,7 +45,7 @@
     </div>
     <div class=" mt-2 flex justify-center h-[20rem] w-full bg-gray-300">
         <img src="{{asset('/images/'.$post->image)}} " alt=""
-        class=" h-full">
+        class=" object-cover h-full">
     </div>
     <div class=" py-3 flex justify-evenly">
         <a href="{{route('post.like',$post)}}" class=" flex gap-2  p-1 px-3 rounded-full 
@@ -54,7 +55,7 @@
         border border-green-200
         @endif">
             <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
-            <span>{{ $post->likes()->count()}}</span>
+            <span>{{ $post->likes_count}}</span>
         </a>
         <a href="" class=" flex gap-2 bg-red-200 p-1 px-3 rounded-full">
             <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">

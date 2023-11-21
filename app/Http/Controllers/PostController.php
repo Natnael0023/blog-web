@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Faker\Core\File;
 use Illuminate\Http\Request;
@@ -14,9 +15,7 @@ class PostController extends Controller
         return view('post.create-post');
     }
 
-    public function store(Request $request){
-        // dd($request);
-
+    public function store(CreatePostRequest $request){
         $newPost = new Post;
 
         $newPost->title = $request->input('title');
@@ -30,26 +29,25 @@ class PostController extends Controller
             $imageName = time().'.'.$request->image->extension();
             $image->move(public_path('images'),$imageName);
             $newPost->image = $imageName;
-            // dd($request);
         }
 
         $newPost->user()->associate(auth()->user());
 
-        $newPost->save();
+        $validated = $request->validated();
+
+        $newPost->save($validated);
         
         return redirect(route('home'));
     }
 
     public function edit(Post $post) {
-        if($post->user_id !== auth()->user()->id){
-            return redirect()->back()->with('unauthorized','You\'re not authorized');
-        }
-        else{
+            $this->authorize('update',$post);
             return view('post.edit-post',['post'=>$post]);
-        }
     }
 
     public function update(Post $post, Request $request){
+        $this->authorize('update',$post);
+
         if($request->hasFile('image')){
             $newImage = $request->file('image');
 
@@ -75,26 +73,20 @@ class PostController extends Controller
         $post->text = $request->input('text');
     }
 
-    // dd($request);
     $post->save();
     return redirect(route('home'))->with('status','post updated successfully');
     }
 
     public function delete(Post $post, Request $request){
-  
-        if($post->user_id == auth()->user()->id)
-        {
+
+            $this->authorize('delete',$post);
              if($post->image){
                  $path = 'images/'.$post->image;
                  unlink($path);
              }
 
              $post->delete($request->all());
-        }
-        else 
-        {
-            return redirect()->back()->with('error','You\'re not authorized');
-        }
+
         return redirect()->back()->with('success','Post has been deleted');
     }
 }
