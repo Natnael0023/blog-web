@@ -14,7 +14,6 @@ class LikeController extends Controller
         }
         $liker = auth()->user();
         $liker->likes()->attach($post);
-        return redirect()->back()->with('success');
     }
 
     public function unlike($post)

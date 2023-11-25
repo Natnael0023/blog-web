@@ -67,7 +67,7 @@
     </div>
 
     {{-- edit profile modal --}}
-    <div x-show="isEditModalOpen" class="modal m-auto bg-[#00000043] flex justify-center items-center fixed inset-0 z-50  " role="dialog" tabindex="-1"  x-cloak x-transition x-on:click.away="isEditModalOpen = false">
+    <div x-show="isEditModalOpen" class="modal m-auto  bg-[#00000043] flex justify-center items-center fixed inset-0 z-50  " role="dialog" tabindex="-1"  x-cloak  x-on:click.away="isEditModalOpen = false">
         <div class="modal-content bg-white opacity-100 z-50 rounded-xl  p-4 ">
             <div class=" flex justify-between items-center">
                 <h2>Edit Profile</h2>

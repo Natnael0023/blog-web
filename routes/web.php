@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
@@ -9,7 +8,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\App;
+use App\Http\Livewire\CommentSection;
 
 Route::get('/',[HomeController::class, 'homepage'] )->name('');
 Route::get('/dashboard', function () {
@@ -48,6 +49,9 @@ Route::get('lang/{lang}', function($lang){
     redirect()->back();
 })->name('lang')->middleware('web');
 
+//notif
+Route::get('/notif',[NotificationController::class,'index'])->middleware('auth')->name('notif.index');
+
 //admin
 Route::get('/admin',[AdminDashboardController::class,'index'])-> name('admin.index')->middleware('auth','can:admin');
 
@@ -58,4 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}',[ProfileController::class, 'show'])->name('profile.show');
 });
 
+
+
+
+Route::get('/comment-section', [CommentSection::class, 'render'])->name('comment-section');
 require __DIR__.'/auth.php';

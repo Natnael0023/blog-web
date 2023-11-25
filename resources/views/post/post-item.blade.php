@@ -1,7 +1,7 @@
-<div class=" p-3 flex flex-col w-full md:w-[30rem]  lg:w-[30rem] border rounded-xl bg-white hover:shadow">
+<div class="  flex flex-col w-full md:w-[30rem]  lg:w-[30rem] border rounded-xl bg-white hover:shadow">
     <div class="  flex justify-between items-center p-3">
         <div class=" flex  items-center gap-2">
-            <div class=" h-[3rem] w-[3rem] rounded-full">
+            <div class=" w-[3rem] h-[3rem]  rounded-full">
                 <a href="{{route('profile.show',$post->user)}}">
                     <img src="{{asset('/images/avatar/'.$post->user->avatar)}}" alt=""
                     class=" object-cover rounded-full h-full w-full border-2 border-sky-200">
@@ -35,45 +35,20 @@
     </div>
     <div class=" px-3">
         <div class=" flex items-center justify-between">
-            <h2 class=" text-xl">
-                {{$post->title}}
+            <h2 class="">
+               {{$post->title}}
             </h2>
         </div>
         <p class=" text-gray-500 text-sm">
             {{$post->text}}
         </p>
     </div>
-    <div class=" mt-2 flex justify-center h-[20rem] w-full bg-gray-300">
+    <div class='mt-2 flex justify-center h-[20rem] w-full rounded-md bg-blue-50 '>
         <img src="{{asset('/images/'.$post->image)}} " alt=""
-        class=" object-cover h-full">
+        class=" object-center h-full rounded-md">
     </div>
-    <div class=" py-3 flex justify-evenly">
-        <a href="{{route('post.like',$post)}}" class=" flex gap-2  p-1 px-3 rounded-full 
-        @if(auth()->user()->likes()->where('post_id',$post->id)->exists()) 
-        bg-green-200
-        @else
-        border border-green-200
-        @endif">
-            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
-            <span>{{ $post->likes_count}}</span>
-        </a>
-        <a href="" class=" flex gap-2 bg-red-200 p-1 px-3 rounded-full">
-            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
-            <span>123</span>
-        </a>
-        <a href="" class=" flex gap-2 bg-sky-200 p-1 px-3 rounded-full">
-            <img class="icon" src="{{asset('icons/heart3.ico')}}" alt="">
-            <span>123</span>
+        {{-- like --}} 
+        @livewire('like-button',['post'=>$post], key($post->id))
 
-        </a>
-    </div>
-    <div>
-        @include('comment.comment-submit')
-    </div>
-
-    @foreach ($post->comments as $comment)
-        @include('comment.comment-section')
-    @endforeach
-
-
+        @livewire('comment-section',['post'=>$post])
 </div>

@@ -35,4 +35,9 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class,'post_like')->withTimestamps();
     }
+
+    public function notification()
+    {
+        return $this->belongsTo(Post::class);
+    }
 };

@@ -1,6 +1,6 @@
-    <nav id="nav" class=" flex justify-between  md:px-32 lg:px-72 px-10 items-center gap-2 bg-white rounded-b-xl   md:sticky lg:sticky top-0 z-50  ">
+    <nav id="nav" class=" flex justify-between py-1 md:px-32 lg:px-72 px-10 items-center gap-2 bg-white rounded-b-xl   md:sticky lg:sticky top-0 z-50  ">
         <div class=" flex items-center">
-            <h1 class=" text-2xl text-blue-500 md:text-3xl lg:text-4xl italic font-serif font-bold ">blooger</h1>
+            <h1 class=" text-2xl tracking-tighter text-blue-500 md:text-3xl lg:text-4xl  font-semibold italic  ">bloog</h1>
             @can('admin')
                 <span class=" ml-2 text-gray-400">admin</span>
             @endcan
@@ -19,6 +19,13 @@
                 
 
                 @auth
+
+                <li>
+                    <a href="{{route('notif.index')}}">
+                        <img class="icon" src="{{asset('icons/bell.ico')}}" alt="">
+                        <span></span>
+                    </a>
+                </li>
                 
                 <x-app-layout>
                 </x-app-layout>

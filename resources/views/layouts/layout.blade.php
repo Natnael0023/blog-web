@@ -8,13 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.4.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <title> @yield('title') | {{config('app.name')}}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body >
     
 @include('layouts.-nav')
 
-<div class=" px-3 md:px-32 lg:px-72 bg-[#f6f3ee]">
+<div class=" px-3 md:px-32 lg:px-80 bg-[#f6f3ee]">
 
     {{-- popup --}}
     @include('shared.success-flash')

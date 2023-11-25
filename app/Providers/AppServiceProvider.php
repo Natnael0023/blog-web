@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             $menulinks = [
                 (object) ['id'=>1, 'name'=>'Home', 'route'=>'home', 'icon'=>'home.ico'],
                 (object) ['id'=>2, 'name'=>'Feed','route'=>'feed','icon'=>'feed.ico'],
-                (object) ['id'=>4, 'name'=>'Profile','route'=>'profile.edit','icon'=>'home.ico'],
+                // (object) ['id'=>4, 'name'=>'Profile','route'=> function() {return route('profile.show',auth()->user());},'icon'=>'home.ico'],
 
             ];
             $view->with('menulinks',$menulinks);

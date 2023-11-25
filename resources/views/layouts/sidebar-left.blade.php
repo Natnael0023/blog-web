@@ -6,5 +6,9 @@
                 <span>{{ $menu->name}}</span>
             </a>
             @endforeach
+            <a href="{{route('profile.show',auth()->user())}}"
+            class="  flex gap-3 items-center p-2 px-10 w-[15rem] hover:bg-gray-200 cursor-pointer {{ (Route::is('profile.show'))? 'text-black font-semibold bg-gray-200': ' text-gray-500' }} ">
+            <img class="icon" src="{{asset('icons/follower.ico')}}" alt="">
+            Profile</a>
     </div>
 </div>
